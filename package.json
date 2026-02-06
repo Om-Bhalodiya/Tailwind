@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "Om": "vite"
+    "Om": "vite",
+    "build": "vite build",
+  "preview": "vite preview"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "devDependencies": {
     "autoprefixer": "^10.4.24",
     "postcss": "^8.5.6",
