@@ -8,38 +8,17 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=favorite" />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<script>
-  const noBtn = document.getElementById("noBtn");
-
-  noBtn.addEventListener("mouseenter", () => {
-    const x = Math.random() * 300 - 150;
-    const y = Math.random() * 200 - 100;
-
-    noBtn.style.transform = `translate(${x}px, ${y}px) rotate(10deg)`;
-  });
-
-  // Mobile support
-  noBtn.addEventListener("touchstart", () => {
-    const x = Math.random() * 300 - 150;
-    const y = Math.random() * 200 - 100;
-
-    noBtn.style.transform = `translate(${x}px, ${y}px) rotate(10deg)`;
-  });
-</script>
-
 <body>
     <div class="h-screen w-screen-lg bg-black flex">
         <div class="w-1/2 bg-rose-300">
             <div class="font-romantic text-6xl text-gray-900 mx-24 my-52 relative">
-                <span class="text-rose-500">We</span> never said it<br> but <span class="text-rose-500">we</span> knew it, <br> it's in the air <span class="text-red-500 animate-floatHeart">❤</span><span class="text-rose-500"><br>right</span> ?
+                <span class="text-rose-500">We</span> never said it<br> but <span class="text-rose-500">we</span> knew it, <br> it's a air of <span class="text-red-500 animate-floatHeart">❤</span><span class="text-rose-500"><br>right</span> ?
                 <div class="relative ml-6 w-6/12 h-40 flex items-center justify-center gap-10">
-                    <!-- YES Button -->
-                    <button
-                        class="px-8 py-3 rounded-full bg-rose-500 text-white text-lg
-                            hover:bg-rose-600 transition mr-64">
+                    <button id="yesBtn" class="mr-64 px-8 py-3 rounded-full bg-rose-500 text-white text-lg
+                        transition-transform duration-300 ease-out hover:scale-105 active:scale-95">
+                        <div id="hearts" class="absolute inset-0 pointer-events-none"></div>
                         Yes
                     </button>
-
                     <button
                         id="noBtn"
                         class="px-8 py-3 rounded-full bg-gray-300 text-gray-700 text-lg 
@@ -48,6 +27,17 @@
                         No
                     </button>
                 </div>
+                <div
+                    id="romanticText"
+                    class="
+                        opacity-0
+                        mt-8
+                        text-rose-600 text-4xl
+                        font-romantic
+                        transition-opacity duration-1000 ease-in-out
+                        ">
+                        Some feelings choose us quietly <span class="text-red-500 animate-floatHeart">❤</span>
+            </div>
             </div>
         </div>
         <div class="w-1/2 bg-rose-200 relative overflow-hidden">
@@ -59,7 +49,6 @@
                         opacity-70
                         animate-glow">
             </div>
-            <!-- Image -->
             <img
                 src="us.png"
                 alt=""
@@ -87,7 +76,6 @@
             `translate(${x}px, ${y}px) rotate(10deg)`;
         });
 
-        // Mobile support
         noBtn.addEventListener("touchstart", () => {
         const x = Math.random() * 300 - 150;
         const y = Math.random() * 200 - 100;
@@ -95,6 +83,48 @@
             `translate(${x}px, ${y}px) rotate(10deg)`;
         });
     });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const yesBtn = document.getElementById("yesBtn");
+        const text = document.getElementById("romanticText");
+        const hearts = document.getElementById("hearts");
+
+        yesBtn.addEventListener("click", () => {
+            text.classList.remove("opacity-0");
+            text.classList.add("opacity-100");
+
+            const count = 28;
+
+            for (let i = 0; i < count; i++) {
+            const heart = document.createElement("span");
+            heart.innerHTML = "❤";
+
+            heart.style.position = "absolute";
+            heart.style.left = "50%";
+            heart.style.top = "55%";
+            heart.style.fontSize = 46 + Math.random() * 26 + "px";
+            heart.style.color = "#fb7188";
+            heart.style.opacity = "0.85";
+            heart.style.transform = "translate(-50%, -50%)";
+
+            hearts.appendChild(heart);
+
+            const x = (Math.random() - 0.5) * 520;
+            const y = (Math.random() - 0.5) * 540 - 40;
+
+            requestAnimationFrame(() => {
+                heart.style.transition =
+                "transform 3s ease-out, opacity 2.4s ease-out";
+                heart.style.transform =
+                `translate(${x}px, ${y}px) scale(1.25)`;
+                heart.style.opacity = "0";
+            });
+
+            setTimeout(() => heart.remove(), 2400);
+            }
+        });
+        });
     </script>
 </body>
 </html>
